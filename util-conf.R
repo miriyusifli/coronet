@@ -20,6 +20,7 @@
 ## Copyright 2018 by Barbara Eckl <ecklbarb@fim.uni-passau.de>
 ## Copyright 2018-2019 by Jakob Kronawitter <kronawij@fim.uni-passau.de>
 ## Copyright 2019 by Anselm Fehnker <fehnker@fim.uni-passau.de>
+## Copyright 2020 by Mirabdulla Yusifli <s8miyusi@stud.uni-saarland.de>
 ## All Rights Reserved.
 
 
@@ -390,6 +391,12 @@ ProjectConf = R6::R6Class("ProjectConf", inherit = Conf,
                 type = "character",
                 allowed = c("jira", "github"),
                 allowed.number = Inf
+            ),
+            gender = list(
+                default = FALSE,
+                type = "logical",
+                allowed = c(TRUE, FALSE),
+                allowed.number = 1
             )
         ),
 
@@ -543,6 +550,8 @@ ProjectConf = R6::R6Class("ProjectConf", inherit = Conf,
             conf$datapath.pasta = private$get.results.folder(data, selection.process, casestudy, "pasta")
             ## store path to issue data
             conf$datapath.issues = private$get.results.folder(data, selection.process, casestudy, tagging, subfolder = tagging)
+            ## store path to gender data
+            conf$datapath.gender = private$get.results.folder(data, selection.process, casestudy, "gender")
 
             ## READ REVISIONS META-DATA
 
