@@ -390,6 +390,12 @@ ProjectConf = R6::R6Class("ProjectConf", inherit = Conf,
                 type = "character",
                 allowed = c("jira", "github"),
                 allowed.number = Inf
+            ),
+            gender = list(
+                default = FALSE,
+                type = "logical",
+                allowed = c(TRUE, FALSE),
+                allowed.number = 1
             )
         ),
 
@@ -543,6 +549,8 @@ ProjectConf = R6::R6Class("ProjectConf", inherit = Conf,
             conf$datapath.pasta = private$get.results.folder(data, selection.process, casestudy, "pasta")
             ## store path to issue data
             conf$datapath.issues = private$get.results.folder(data, selection.process, casestudy, tagging, subfolder = tagging)
+            ## store path to gender data
+            conf$datapath.gender = private$get.results.folder(data, selection.process, casestudy, "gender")
 
             ## READ REVISIONS META-DATA
 
