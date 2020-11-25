@@ -14,6 +14,7 @@
 ## Copyright 2018 by Christian Hechtl <hechtl@fim.uni-passau.de>
 ## Copyright 2018-2019 by Claus Hunsen <hunsen@fim.uni-passau.de>
 ## Copyright 2019 by Jakob Kronawitter <kronawij@fim.uni-passau.de>
+## Copyright 2020 by Mirabdulla Yusifli <s8miyusi@stud.uni-saarland.de>
 ## All Rights Reserved.
 
 
@@ -178,4 +179,24 @@ test_that("Filter patchstack mails with PaStA enabled", {
 
     ## ensure that there are no other entries than the ones that have been verified to exist above
     expect_equal(6, nrow(filtered.pasta))
+})
+
+test_that("Read author data and merge it with gender data.", {
+    ## configuration object for the datapath
+    proj.conf = ProjectConf$new(CF.DATA, CF.SELECTION.PROCESS, CASESTUDY, ARTIFACT)
+    proj.conf$update.value("gender", TRUE)
+    
+    proj.data = ProjectData$new(proj.conf)
+
+    ## author data merged with gender data
+    author.data.get = proj.data$get.authors()
+
+    ## build the expected data.frame
+    author.data.expected = data.frame(author.name = c("Thomas", "Olaf", "Björn", "udo", "Fritz fritz@example.org", "georg", "Hans", "Karl", "Max"),
+                                      author.id = as.integer(c(4936, 4937, 4938, 4939, 4940, 4941, 4942, 4943, 4944)),
+                                      author.email = c("thomas@example.org", "olaf@example.org", "bjoern@example.org", "udo@example.org", "asd@sample.org", "heinz@example.org", "hans1@example.org", "karl@example.org", "max@example.org"),
+                                      gender = c("male", "female", "male", "female", NA, "male", "male", "male", "male"))
+
+    ## check the results
+    expect_identical(author.data.get, author.data.expected, info = "Author-Gender data.")
 })
