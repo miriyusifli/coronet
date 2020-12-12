@@ -183,6 +183,8 @@ There are two distinguishable types of data sources that are both handled by the
         * Patch-stack analysis to link patches sent to mailing lists and upstream commits
     * Synchronicity information on commits (see also the parameter `synchronicity` in the [`ProjectConf`](#configurable-data-retrieval-related-parameters) class)
         * Synchronous commits are commits that change a source-code artifact that has also been changed by another author within a reasonable time-window.
+    * Gender data (see also the parameter `gender` in the [`ProjectConf`](#configurable-data-retrieval-related-parameters) )
+        * Gender information about authors
 
  The important difference is that the *main data sources* are used internally to construct artifact vertices in relevant types of networks. Additionally, these data sources can be used as a basis for splitting `ProjectData` in a time-based or activity-based manner – obtaining `RangeData` instances as a result (see file `split.R` and the contained functions). Thus, `RangeData` objects contain only data of a specific period of time.
 
@@ -501,6 +503,8 @@ There is no way to update the entries, except for the revision-based parameters.
     * The data path to the synchronicity data
 - `datapath.pasta`
     * The data path to the pasta data
+- `datapath.gender`
+    * The data path to the gender data
 
 #### Splitting information
 
@@ -554,7 +558,10 @@ There is no way to update the entries, except for the revision-based parameters.
     * Read and integrate [PaStA](https://github.com/lfd/PaStA/) data with commit and mail data (columns `pasta` and `revision.set.id`)
     * [`TRUE`, *`FALSE`*]
     * **Note**: To include PaStA-based edge attributes, you need to give the `"pasta"` edge attribute for `edge.attributes`.
-
+- `gender`
+    * Read and merge gender data with authors
+    * [`TRUE`, *`FALSE`*]
+    
 ### NetworkConf
 
 In this section, we give an overview on the parameters of the `NetworkConf` class and their meaning.
